@@ -20,8 +20,8 @@ def add_user(username, password):
 # Login page
 def login_page():
     st.title('Login')
-    username = st.text_input('Username', key='login_username')
-    password = st.text_input('Password', type='password', key='login_password')
+    username = st.text_input('Username')
+    password = st.text_input('Password', type='password')
     if st.button('Login', key='login_button'):
         if user_exists(username, password):
             st.success('Logged in successfully')
@@ -31,10 +31,10 @@ def login_page():
 # Signup page
 def signup_page():
     st.title('Signup')
-    username = st.text_input('Username', key='signup_username')
-    password = st.text_input('Password', type='password', key='signup_password')
-    re_password = st.text_input('Re-enter Password', type='password', key='signup_re_password')
-    if st.button('Signup', key='signup_button_signup'):
+    username = st.text_input('Username')
+    password = st.text_input('Password', type='password')
+    re_password = st.text_input('Re-enter Password', type='password')
+    if st.button('Signup', key='signup_button'):
         if not username or not password or not re_password:
             st.error('Please fill in all fields')
             st.sidebar.subheader('Please fill in all fields')
@@ -46,10 +46,13 @@ def signup_page():
             add_user(username, password)
             st.success('Account created successfully')
             st.write('Navigate back to login page')
-            login_page()
 
-# Show login page
-if st.button('Login', key='login_button'):
-    login_page()
-else:
-    signup_page()
+# Navigation
+def navigation():
+    if st.sidebar.button('Login', key='login_button_nav'):
+        login_page()
+    elif st.sidebar.button('Signup', key='signup_button_nav'):
+        signup_page()
+
+# Show navigation
+navigation()
