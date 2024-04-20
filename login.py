@@ -1,8 +1,8 @@
 import streamlit as st
-import openpyxl
+import openpyxl as px
 
 # Load the Excel file
-wb = openpyxl.load_workbook('users.xlsx')
+wb = px.load_workbook('users.xlsx')
 sheet = wb.active
 
 # Function to check if user exists
